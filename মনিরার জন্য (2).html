@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>মনিরার জন্য</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf1ef; --ink:#3a1f33; --soft:#7a5a72; --rose:#c2456b; --glow:rgba(194,69,107,.14);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1a1225; --ink:#f6e9e6; --soft:#b99fb3; --rose:#f0a3b9; --glow:rgba(240,163,185,.16)}
+}
+:root[data-theme="dark"]{--bg:#1a1225; --ink:#f6e9e6; --soft:#b99fb3; --rose:#f0a3b9; --glow:rgba(240,163,185,.16)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif;
+  background-image:radial-gradient(60% 40% at 50% 0%,var(--glow),transparent 70%);background-repeat:no-repeat}
+main{max-width:34rem;margin:0 auto;padding:12vh 1.5rem 9rem;text-align:center}
+h1{font-family:"Tiro Bangla","Noto Serif Bengali",serif;font-weight:400;font-size:clamp(3.6rem,17vw,6rem);margin:0;color:var(--rose);line-height:1.2}
+.sub{color:var(--soft);margin:.5rem 0 3rem;font-size:1.05rem}
+.poem{font-family:"Tiro Bangla","Noto Serif Bengali",serif;font-size:1.3rem;line-height:2.1}
+.poem p{margin:0;opacity:0;transform:translateY(6px);transition:opacity .9s ease,transform .9s ease;min-height:0}
+.poem p.on{opacity:1;transform:none}
+.poem .gap{height:1.6rem}
+.final{font-family:"Tiro Bangla","Noto Serif Bengali",serif;font-size:clamp(1.9rem,8vw,2.6rem);color:var(--rose);margin:2.5rem 0 1rem;line-height:1.5;opacity:0;transition:opacity 1.4s ease}
+.final.on{opacity:1}
+.note{color:var(--soft);font-size:1rem;line-height:1.8;opacity:0;transition:opacity 1.4s ease .6s}
+.note.on{opacity:1}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:1rem 1rem calc(1rem + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;background:linear-gradient(transparent,var(--bg) 40%)}
+button{font:inherit;font-size:1.1rem;font-weight:600;color:var(--bg);background:var(--rose);border:0;border-radius:2rem;padding:.85rem 2.4rem;cursor:pointer}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.poem p,.final,.note{transition:none;transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>মনিরা</h1>
+  <p class="sub">তোমার জন্য কিছু কথা, ছন্দে লেখা</p>
+
+  <div class="poem" id="poem" aria-live="polite">
+    <p>মনিরা, তোমার নামটি যখন মনে আসে,</p>
+    <p>আমার সারা মনটা তখন খুশির হাসি হাসে।</p>
+    <div class="gap"></div>
+    <p>কতদিন ভেবেছি, তোমায় বলি কথাটা,</p>
+    <p>বুকের ভেতর জমে আছে ব্যাকুলতাটা।</p>
+    <div class="gap"></div>
+    <p>তুমি যদি না-ও বোঝো, আমি তবুও বলব,</p>
+    <p>তোমার পাশে হেঁটে হেঁটে সারা পথ চলব।</p>
+    <div class="gap"></div>
+    <p>আকাশ যদি কাগজ হতো, সাগর হতো কালি,</p>
+    <p>তবুও লেখা শেষ হতো না, কত যে ভালোবাসি।</p>
+  </div>
+
+  <p class="final" id="final">মনিরা, আমি তোমাকে ভালোবাসি।</p>
+  <p class="note" id="note">উত্তর দেওয়ার কোনো তাড়া নেই।<br>তুমি যখন প্রস্তুত, তখন বোলো।<br><br>ইতি,<br>যে তোমাকে ভালোবাসে</p>
+</main>
+
+<div class="bar"><button id="next" type="button">পড়তে শুরু করো</button></div>
+
+<script>
+(function(){
+  var lines=document.querySelectorAll('#poem p'),i=0,
+      btn=document.getElementById('next'),
+      fin=document.getElementById('final'),
+      note=document.getElementById('note');
+  btn.addEventListener('click',function(){
+    if(i<lines.length){
+      lines[i++].classList.add('on');
+      if(i<lines.length){lines[i++].classList.add('on');}
+      btn.textContent='পরের লাইন';
+    }
+    if(i>=lines.length){
+      btn.hidden=true;
+      setTimeout(function(){fin.classList.add('on');note.classList.add('on');fin.scrollIntoView({behavior:'smooth',block:'center'});},900);
+    }
+  });
+})();
+</script>
+</body>
+</html>
